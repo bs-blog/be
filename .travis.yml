@@ -6,7 +6,10 @@ cache:
   - node_modules
 script:
   - npm test
-  - npm run build
+after_success:
+  - bash ./travis/unit-test-success.sh
+after_failure:
+  - bash ./travis/unit-test-fail.sh
 deploy:
   provider: pages
   skip_cleanup: true

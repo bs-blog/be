@@ -1,4 +1,4 @@
-const {numToTimeFormat, timestampToDateFormat} = require('../src/lib/time')
+const {numToTimeFormat, timestampToDateFormat} = require('../lib/time')
 
 describe('numToTimeFormat', ()=>{
     beforeAll(()=>{

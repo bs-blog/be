@@ -15,7 +15,7 @@
     "kill:client": "pkill -15 -f -o bin/nodemon;kill $(lsof -i:3000 -sTCP:LISTEN -t);echo All dev-server should be killed",
     "build": "npm run locator ; react-app-rewired build",
     "locator": "node locator",
-    "test": "react-app-rewired test --env=jsdom",
+    "test": "react-app-rewired test --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "lint": "node_modules/.bin/eslint src/",
     "predeploy": "npm run build",
