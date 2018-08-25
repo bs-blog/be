@@ -17,11 +17,13 @@ import { Provider } from 'react-redux'
 import store from './store'
 import './lib/polyfill.js'
 
+const basename = process.env.ROUTER_BASENAME || window.ROUTER_BASENAME || ''
+
 const Root = ({ store }) => (
   <Provider store={store}>
     <Auth>
       <Private>
-        <Router>
+        <Router basename={`/${basename}`}>
           <Layout>
             <SideBar />
             <PublicLayout />
@@ -29,7 +31,7 @@ const Root = ({ store }) => (
         </Router>
       </Private>
       <Public>
-        <Router>
+        <Router basename={`/${basename}`}>
           <PrivateLayout />
         </Router>
       </Public>
