@@ -37,9 +37,19 @@ const SiderMenu = ({ match }) => {
 }
 
 class SideBar extends Component {
+  state = {
+    collapsed: false
+  }
+  onCollapse = collapsed => {
+    console.log(collapsed)
+    this.setState({ collapsed })
+  }
   render() {
     return (
       <Sider
+        collapsible
+        collapsed={this.state.collapsed}
+        onCollapse={this.onCollapse}
         style={{
           overflow: 'auto',
           height: '100vh',
