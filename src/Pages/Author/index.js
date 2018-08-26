@@ -3,16 +3,10 @@ import './index.css'
 import { message, Button, Icon, Form, Input, Upload } from 'antd'
 import { squareDiv } from '../../lib/style'
 import { AUTHOR_IMAGE_NOT_FOUND } from '../../lib/const'
+import firebase from '../../lib/firebase'
+
 const { TextArea } = Input
 const FormItem = Form.Item
-
-const imageProps = {
-  name: 'file',
-  action: '/ajax/upload',
-  headers: {
-    authorization: 'authorization-text'
-  }
-}
 
 class AuthorEditor extends Component {
   constructor(props) {
@@ -41,17 +35,19 @@ class AuthorEditor extends Component {
       })
     })
   }
+  upload = async file => {
+    try {
+      const name = file.name
+      const storageRef = firebase.storage().ref()
+      const snapshoot = await storageRef.child(`images/${name}`).put(file)
+      const previewImage = await snapshoot.ref.getDownloadURL()
 
-  onChangeUpload = info => {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList)
-    }
-    if (info.file.status === 'done') {
-      const previewImage = info.file.response.url
-      message.success(`${info.file.response.url} file uploaded successfully`)
+      message.success(`Profile picture uploaded successfully`)
       this.setState({ previewImage })
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`)
+
+      return previewImage
+    } catch (err) {
+      message.error(err)
     }
   }
 
@@ -60,6 +56,11 @@ class AuthorEditor extends Component {
     const { getFieldDecorator } = this.props.form
     const { previewImage } = this.state
     const { id, name, about, description } = author
+
+    const imageProps = {
+      name: 'file',
+      action: this.upload
+    }
 
     return (
       <div>
@@ -94,7 +95,7 @@ class AuthorEditor extends Component {
 
               <FormItem>
                 {getFieldDecorator('imageUrl', {})(
-                  <Upload {...imageProps} onChange={this.onChangeUpload}>
+                  <Upload {...imageProps}>
                     <Button>
                       <Icon type="upload" /> Click to Upload
                     </Button>

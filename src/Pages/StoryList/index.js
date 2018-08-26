@@ -4,6 +4,7 @@ import { Row, Col, Button, Icon } from 'antd'
 import { timestampToDateFormat } from '../../lib/time'
 import { squareDiv } from '../../lib/style'
 import { AUTHOR_IMAGE_NOT_FOUND } from '../../lib/const'
+import { Link } from 'react-router-dom'
 
 const rowStyle = {
   height: '50px',
@@ -17,12 +18,12 @@ const authorFieldDiv = targetAuthor => {
   return (
     <div>
       {name && (
-        <a href={`/author/${id}`}>
+        <Link to={`/author/${id}`}>
           <div className="UserWrapperImageEditorList">
             {<div className="spuareUserImageEditorList" style={squareDiv(imageUrl)} />}
             <span> {name} </span>
           </div>
-        </a>
+        </Link>
       )}
       {!name && <span> No author </span>}
     </div>

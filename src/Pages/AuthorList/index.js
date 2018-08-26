@@ -3,6 +3,7 @@ import './index.css'
 import { Row, Col, Button, Icon } from 'antd'
 import { timestampToDateFormat } from '../../lib/time'
 import { squareDiv } from '../../lib/style'
+import { Link } from 'react-router-dom'
 
 const rowStyle = {
   height: '50px',
@@ -34,10 +35,10 @@ class HomePage extends Component {
             <Row gutter={16} key={index} style={rowStyle}>
               {/* <Col span={4}> {index}</Col> */}
               <Col span={6}>
-                <a href={`/author/${id}`}>
+                <Link to={`/author/${id}`}>
                   <Icon type="edit" />
                   <span> {name} </span>
-                </a>
+                </Link>
               </Col>
               <Col span={6}>
                 {imageUrl ? (
