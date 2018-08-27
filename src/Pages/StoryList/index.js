@@ -65,10 +65,10 @@ class StoryPage extends Component {
               <Row gutter={10} key={index} style={rowStyle}>
                 <Col span={6}>{authorFieldDiv(targetAuthor)}</Col>
                 <Col span={8}>
-                  <a href={`/storys/${id}`}>
+                  <Link to={`/storys/${id}`}>
                     <Icon type="edit" />
                     <span> {name} </span>
-                  </a>
+                  </Link>
                 </Col>
                 <Col span={8}>
                   {this.findCategorysByCatMapping(selectedCategorys).map(item => (
