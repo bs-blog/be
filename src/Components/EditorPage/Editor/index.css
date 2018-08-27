@@ -12,6 +12,7 @@
 
 .editorComponentWrapper iframe{
   width: 100%;
+  max-width: 650px;
 }
 
 .md-block.md-block-image > div {
