@@ -15,9 +15,6 @@ const iconMapping = {
 
 const RowItem = ({ path, title, isSidebar = true }) => {
   if (!isSidebar) return
-
-  console.log('title: ', title)
-
   return (
     <Item key={title}>
       <Link to={path}>
@@ -57,7 +54,7 @@ class SideBar extends Component {
           left: 0
         }}
       >
-        <div className="logo" />
+        <div className="sideBarLogo" />
         <Route path="/" component={SiderMenu} />
       </Sider>
     )
