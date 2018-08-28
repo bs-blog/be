@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import dao from './dao'
+import daoEidtor from './dao'
 import daoAuthors from '../../lib/dao/authors'
 import daoCategorys from '../../lib/dao/categorys'
 import PresentationalComponent from './index'
@@ -13,7 +13,7 @@ class Container extends Component {
     this.database = database
     this.daoCategorys = new daoCategorys(this.database)
     this.daoAuthors = new daoAuthors(this.database)
-    this.dao = new dao(this.database)
+    this.dao = new daoEidtor(this.database)
     this.state = {
       storys: [],
       categorys: [],
@@ -45,6 +45,13 @@ class Container extends Component {
     })
   }
 
+  deleteStory = id => {
+    return this.dao.deleteById(id)
+  }
+  disableStory = id => {
+    return this.dao.updateById(id, { status: 'DISABLE' })
+  }
+
   render() {
     const { storys = [], categorys, authors } = this.state
     return (
@@ -53,6 +60,8 @@ class Container extends Component {
         createStory={this.createStory}
         categorys={categorys}
         authors={authors}
+        deleteStory={this.deleteStory}
+        disableStory={this.disableStory}
       />
     )
   }

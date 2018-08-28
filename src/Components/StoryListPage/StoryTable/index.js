@@ -53,6 +53,11 @@ const columns = [
     render: authorFieldDiv
   },
   {
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status'
+  },
+  {
     title: 'CreatedAt',
     dataIndex: 'createdAt',
     key: 'createdAt'
@@ -60,14 +65,20 @@ const columns = [
   {
     title: 'Action',
     key: 'action',
-    render: (text, record) => (
-      <span>
-        <Divider type="vertical" />
-        <a href="javascript:;">
-          <Icon type="delete" />
-        </a>
-      </span>
-    )
+    render: (text, record) => {
+      const { deleteStory, disableStory } = record
+      return (
+        <span>
+          <a onClick={disableStory}>
+            <Icon type="minus-circle-o" />
+          </a>
+          <Divider type="vertical" />
+          <a onClick={deleteStory}>
+            <Icon type="delete" />
+          </a>
+        </span>
+      )
+    }
   }
 ]
 
@@ -86,16 +97,36 @@ export default class StoreListTable extends React.Component {
   }
   tableData(storys = []) {
     return storys.map((item, index) => {
-      const { name: title, categorys: selectedCategorys, author, createdAt, id } = item
+      const { deleteStory, disableStory } = this.props
+      const {
+        name: title,
+        categorys: selectedCategorys,
+        author,
+        createdAt,
+        id,
+        status = 'DRAFT'
+      } = item
       const targetAuthor = this.findAuthorById(author)
       const selectedCategorysList = this.findCategorysByCatMapping(selectedCategorys)
 
       return {
+        id,
         key: index,
         author: targetAuthor,
         createdAt: timestampToDateFormat(createdAt),
         title: { title, id },
-        categorys: selectedCategorysList
+        categorys: selectedCategorysList,
+        status,
+        deleteStory: function() {
+          if (window.confirm('Are you sure to delete the story? It will never come back.')) {
+            return deleteStory(id)
+          }
+        },
+        disableStory: function() {
+          if (window.confirm('Disable story.')) {
+            return disableStory(id)
+          }
+        }
       }
     })
   }

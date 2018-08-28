@@ -43,6 +43,13 @@ class Container extends Component {
     return this.daoStory.updateById(id, payload)
   }
 
+  onPublishSaveStory(id, payload) {
+    return this.daoStory.updateById(id, {
+      ...payload,
+      status: 'PUBLISHED'
+    })
+  }
+
   onHandleChangeCategory(selectedCategory) {
     this.setState({ selectedCategory })
   }
@@ -65,6 +72,7 @@ class Container extends Component {
         onHandleChangeAuthor={this.onHandleChangeAuthor.bind(this)}
         onHandleChangeCategory={this.onHandleChangeCategory.bind(this)}
         onHandleSaveStory={this.onHandleSaveStory.bind(this)}
+        onPublishSaveStory={this.onPublishSaveStory.bind(this)}
       />
     )
   }

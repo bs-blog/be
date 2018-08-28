@@ -12,7 +12,6 @@ class StoryPage extends Component {
     })
   }
   render() {
-    const { storys = [], categorys = [], authors = [] } = this.props
     return (
       <div className="storyPageWrapper">
         <h1> Storys </h1>
@@ -20,7 +19,7 @@ class StoryPage extends Component {
           <Button onClick={this.handleCreate}> New </Button>
         </Row>
         <div className="storyWrapper">
-          <StoreListTable storys={storys} authors={authors} categorys={categorys} />
+          <StoreListTable {...this.props} />
         </div>
       </div>
     )

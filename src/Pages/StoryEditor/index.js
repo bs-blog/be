@@ -19,19 +19,40 @@ class EditorPage extends Component {
     this.setState({ msg: null })
   }
 
-  onHandleSaveStory = () => {
-    const { storyId, selectedCategory = [], selectedAuthor: author = '', history } = this.props
-    const editorState = this.refs.editorComponent.state.editorState
+  handleRequest = (storyId, payload) => {
+    const { onHandleSaveStory, history } = this.props
+
+    return onHandleSaveStory(storyId, payload)
+      .then(() => this.reset())
+      .then(() => history.push(`/storys`))
+  }
+
+  preHandleRequest = () => {
+    const { selectedCategory = [], selectedAuthor: author = '' } = this.props
+    const { editorState } = this.refs.editorComponent.state
+
     const data = JSON.stringify(DraftJS.convertToRaw(editorState.getCurrentContent()))
     const categorys = {}
     selectedCategory.forEach(item => (categorys[item] = true))
-    const payload = { data, categorys, author }
-    this.setState({ msg: 'Updating story ...' })
-    return this.props
-      .onHandleSaveStory(storyId, payload)
-      .then(() => this.reset())
-      .then(() => history.push(`/storys`))
-      .then(() => message.success(`Story is saved successfully`))
+    return { data, categorys, author }
+  }
+
+  onPublishSaveStory = () => {
+    const { storyId } = this.props
+    const payload = this.preHandleRequest()
+    const status = 'PUBLISHED'
+    return this.handleRequest(storyId, { ...payload, status }).then(() =>
+      message.success(`Story is published successfully`)
+    )
+  }
+
+  onHandleSaveStory = () => {
+    const { storyId } = this.props
+    const payload = this.preHandleRequest()
+    const status = 'DRAFT'
+    return this.handleRequest(storyId, { ...payload, status }).then(() =>
+      message.success(`Story is saved as draft successfully`)
+    )
   }
 
   render() {
@@ -50,9 +71,13 @@ class EditorPage extends Component {
       <div className="editorPageWrapper">
         <div className="editorPageTitleBox">
           <h1> Editor of {storyId}</h1>
-          <Button onClick={this.onHandleSaveStory} type="primary">
+          <Button onClick={this.onHandleSaveStory} type="primary" className="pushFlex">
             {' '}
-            Save{' '}
+            Save Draft{' '}
+          </Button>
+          <Button onClick={this.onPublishSaveStory} type="primary" className="leftMargin">
+            {' '}
+            Save Publish{' '}
           </Button>
         </div>
         <Row style={{ margin: '20px 0' }}>{msg && <span> {msg} </span>}</Row>

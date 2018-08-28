@@ -10,5 +10,13 @@
 .editorPageTitleBox {
   display: flex;
   line-height: 30px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+}
+
+.pushFlex {
+  margin-left: auto;
+}
+
+.leftMargin {
+  margin-left: 10px;
 }

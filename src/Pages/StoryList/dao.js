@@ -18,4 +18,11 @@ module.exports = class Categorys extends Base {
     const list = this.fbListToArray(result)
     return list.map(item => storyParser(item))
   }
+
+  create(payload) {
+    return super.create({
+      ...payload,
+      status: 'DRAFT'
+    })
+  }
 }

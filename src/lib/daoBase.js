@@ -41,6 +41,10 @@ module.exports = class Base {
     return Promise.reject('invalidate Data')
   }
 
+  deleteById(id) {
+    return this.ref.child(id).remove()
+  }
+
   validateCreatePayload(payload) {
     return true
   }
