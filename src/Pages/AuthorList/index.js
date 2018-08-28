@@ -3,7 +3,7 @@ import './index.css'
 import { Row, Col, Button, Icon } from 'antd'
 import { timestampToDateFormat } from '../../lib/time'
 import { squareDiv } from '../../lib/style'
-import { Link } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 
 const rowStyle = {
   height: '50px',
@@ -12,12 +12,13 @@ const rowStyle = {
 }
 
 /*eslint no-useless-constructor: 0*/
-class HomePage extends Component {
+class AuthorList extends Component {
   state = {}
 
   handleCreate = () => {
-    return this.props.createAuthor().then(newestAuthor => {
-      return window.location.replace(`/author/${newestAuthor.id}`)
+    const { history, createAuthor } = this.props
+    return createAuthor().then(newestAuthor => {
+      return history.push(`/author/${newestAuthor.id}`)
     })
   }
   render() {
@@ -56,4 +57,14 @@ class HomePage extends Component {
     )
   }
 }
-export default HomePage
+
+export default props => {
+  return (
+    <Route
+      render={({ history }) => {
+        const _props = { ...props, history }
+        return <AuthorList {..._props} />
+      }}
+    />
+  )
+}
