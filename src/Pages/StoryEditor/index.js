@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import './index.css'
-import { Row, Button } from 'antd'
+import { Row, Button, message } from 'antd'
 import DraftJS from 'draft-js'
 import EditorComponent from '../../Components/EditorPage/Editor'
 import MultiItemsSeletor from '../../Components/EditorPage/MultiItemsSeletor'
 import SingleSelector from '../../Components/EditorPage/SingleSelector'
+import { Route } from 'react-router-dom'
 
 class EditorPage extends Component {
   constructor(props) {
@@ -19,14 +20,18 @@ class EditorPage extends Component {
   }
 
   onHandleSaveStory = () => {
-    const { storyId, selectedCategory = [], selectedAuthor: author = '' } = this.props
+    const { storyId, selectedCategory = [], selectedAuthor: author = '', history } = this.props
     const editorState = this.refs.editorComponent.state.editorState
     const data = JSON.stringify(DraftJS.convertToRaw(editorState.getCurrentContent()))
     const categorys = {}
     selectedCategory.forEach(item => (categorys[item] = true))
     const payload = { data, categorys, author }
     this.setState({ msg: 'Updating story ...' })
-    return this.props.onHandleSaveStory(storyId, payload).then(() => this.reset())
+    return this.props
+      .onHandleSaveStory(storyId, payload)
+      .then(() => this.reset())
+      .then(() => history.push(`/storys`))
+      .then(() => message.success(`Story is saved successfully`))
   }
 
   render() {
@@ -84,4 +89,13 @@ class EditorPage extends Component {
   }
 }
 
-export default EditorPage
+export default props => {
+  return (
+    <Route
+      render={({ history }) => {
+        const _props = { ...props, history }
+        return <EditorPage {..._props} />
+      }}
+    />
+  )
+}
