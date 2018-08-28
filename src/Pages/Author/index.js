@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './index.css'
 import { message, Button, Icon, Form, Input, Upload } from 'antd'
 import { squareDiv } from '../../lib/style'
-import { AUTHOR_IMAGE_NOT_FOUND } from '../../lib/const'
+import { AUTHOR_IMAGE_NOT_FOUND } from '../../const/images'
 import firebase from '../../lib/firebase'
 
 const { TextArea } = Input
