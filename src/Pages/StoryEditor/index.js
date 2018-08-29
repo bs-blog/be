@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import './index.css'
-import { Row, Button, message } from 'antd'
+import { Row, Button, message, Breadcrumb } from 'antd'
 import DraftJS from 'draft-js'
 import EditorComponent from '../../Components/EditorPage/Editor'
 import MultiItemsSeletor from '../../Components/EditorPage/MultiItemsSeletor'
 import SingleSelector from '../../Components/EditorPage/SingleSelector'
-import { Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 
 class EditorPage extends Component {
   constructor(props) {
@@ -67,10 +67,16 @@ class EditorPage extends Component {
       onHandleChangeCategory,
       onHandleChangeAuthor
     } = this.props
+    const displayTitle = (storyData && storyData.name) || storyId
     return (
       <div className="editorPageWrapper">
-        <div className="editorPageTitleBox">
-          <h1> Editor of {storyId}</h1>
+        <div className="titleBarWrapper">
+          <Breadcrumb>
+            <Breadcrumb.Item>
+              <Link to="/storys">Storys</Link>
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>{displayTitle}</Breadcrumb.Item>
+          </Breadcrumb>
           <Button onClick={this.onHandleSaveStory} type="primary" className="pushFlex">
             {' '}
             Save Draft{' '}
@@ -80,8 +86,6 @@ class EditorPage extends Component {
             Save Publish{' '}
           </Button>
         </div>
-        <Row style={{ margin: '20px 0' }}>{msg && <span> {msg} </span>}</Row>
-
         <div>
           {categorys &&
             categorys.length > 1 && (

@@ -18,7 +18,7 @@ class StoryPage extends Component {
           <Breadcrumb>
             <Breadcrumb.Item>Storys/</Breadcrumb.Item>
           </Breadcrumb>
-          <Button onClick={this.handleCreate} type="primary">
+          <Button onClick={this.handleCreate} type="primary" className="pushFlex">
             {' '}
             New{' '}
           </Button>
