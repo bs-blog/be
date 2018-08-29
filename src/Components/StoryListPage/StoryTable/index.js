@@ -32,6 +32,7 @@ const authorFieldDiv = targetAuthor => {
 }
 
 export default class StoreListTable extends React.Component {
+  // start -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= copy from antd
   state = {
     filteredInfo: null,
     sortedInfo: null
@@ -63,6 +64,8 @@ export default class StoreListTable extends React.Component {
       }
     })
   }
+
+  // end -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= copy from antd
 
   findCategorysByCatMapping(targetCategorys = {}) {
     if (!targetCategorys || global.isEmptyObject(targetCategorys)) return []
@@ -133,9 +136,9 @@ export default class StoreListTable extends React.Component {
         dataIndex: 'categorys',
         render: categorys => (
           <span>
-            {categorys.map(({ name }) => (
+            {categorys.map(({ name, id }) => (
               <Tag color="blue" key={name}>
-                {name}
+                <Link to={`/storys/category/${id}`}>{name}</Link>
               </Tag>
             ))}
           </span>

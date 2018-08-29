@@ -14,6 +14,7 @@ module.exports = class Base {
     }))
   }
 
+  // fetchData -=-=--=-=-=-=-=-=-=--=-=-=-=-=
   normalize(result) {
     return result
   }
@@ -31,6 +32,7 @@ module.exports = class Base {
     this.fetchDataFunction(cb)
   }
 
+  // update -=-=--=-=-=-=-=-=-=--=-=-=-=-=
   validateUpdatePayload(payload) {
     return true
   }
@@ -41,10 +43,7 @@ module.exports = class Base {
     return Promise.reject('invalidate Data')
   }
 
-  deleteById(id) {
-    return this.ref.child(id).remove()
-  }
-
+  // create -=-=--=-=-=-=-=-=-=--=-=-=-=-=
   validateCreatePayload(payload) {
     return true
   }
@@ -66,5 +65,10 @@ module.exports = class Base {
       .then(snap => {
         return snap
       })
+  }
+
+  // delete -=-=--=-=-=-=-=-=-=--=-=-=-=-=
+  deleteById(id) {
+    return this.ref.child(id).remove()
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import daoEidtor from './dao'
+import daoStorys from './dao'
 import daoAuthors from '../../lib/dao/authors'
 import daoCategorys from '../../lib/dao/categorys'
 import PresentationalComponent from './index'
@@ -9,11 +9,12 @@ import { convertToRaw } from 'draft-js'
 
 class Container extends Component {
   constructor(props) {
+    const { command = null } = props
     super(props)
     this.database = database
     this.daoCategorys = new daoCategorys(this.database)
     this.daoAuthors = new daoAuthors(this.database)
-    this.dao = new daoEidtor(this.database)
+    this.dao = new daoStorys(this.database, command)
     this.state = {
       storys: [],
       categorys: [],
@@ -51,7 +52,6 @@ class Container extends Component {
   disableStory = id => {
     return this.dao.updateById(id, { status: 'DISABLE' })
   }
-
   render() {
     const { storys = [], categorys, authors } = this.state
     return (

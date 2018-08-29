@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Button } from 'antd'
+import { Button, Breadcrumb } from 'antd'
 import StoreListTable from '../../Components/StoryListPage/StoryTable'
 import { Route } from 'react-router-dom'
 import './index.css'
@@ -14,10 +14,15 @@ class StoryPage extends Component {
   render() {
     return (
       <div className="storyPageWrapper">
-        <h1> Storys </h1>
-        <Row style={{ marginBottom: '20px' }}>
-          <Button onClick={this.handleCreate}> New </Button>
-        </Row>
+        <div className="titleBarWrapper">
+          <Breadcrumb>
+            <Breadcrumb.Item>Storys/</Breadcrumb.Item>
+          </Breadcrumb>
+          <Button onClick={this.handleCreate} type="primary" className="pushFlex">
+            {' '}
+            New{' '}
+          </Button>
+        </div>
         <div className="storyWrapper">
           <StoreListTable {...this.props} />
         </div>

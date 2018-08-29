@@ -4,6 +4,7 @@ import AuthorEditor from '../Pages/Author/Container'
 import Logout from '../Pages/Logout/Container'
 import StoryEditor from '../Pages/StoryEditor/Container'
 import StoryList from '../Pages/StoryList/Container'
+import StoryCategoryList from '../Pages/StoryList/ContainerCategory'
 
 const config = [
   {
@@ -32,6 +33,11 @@ const config = [
     path: '/storys',
     title: 'Storys',
     component: StoryList
+  },
+  {
+    path: '/storys/category/:id',
+    title: 'Storys of Category',
+    component: StoryCategoryList
   },
   {
     path: '/logout',
