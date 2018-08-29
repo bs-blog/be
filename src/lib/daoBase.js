@@ -38,6 +38,11 @@ module.exports = class Base {
   }
 
   updateById(id, payload) {
+    if (!payload.createdAt) {
+      const updatedAt = new Date().getTime()
+      payload = { ...payload, updatedAt }
+    }
+
     if (this.validateUpdatePayload(payload)) return this.ref.child(id).update(payload)
 
     return Promise.reject('invalidate Data')
@@ -53,7 +58,8 @@ module.exports = class Base {
 
     if (!payload.createdAt) {
       const createdAt = new Date().getTime()
-      payload = { ...payload, createdAt }
+      const updatedAt = createdAt
+      payload = { ...payload, createdAt, updatedAt }
     }
 
     return this.ref

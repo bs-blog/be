@@ -20,15 +20,17 @@ class AuthorEditor extends Component {
   handleSubmit(e) {
     const { updateAuthorById } = this.props
     const authorId = this.props.author.id
+    const { previewImage } = this.state
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (err) {
         return message.error(err)
       }
 
-      const { userName: name = '', description = '', about = '', imageUrl: imgObj } = values
-      const imageUrl = (imgObj && imgObj.fileList && imgObj.fileList[0].response.url) || ''
+      const { userName: name = '', description = '', about = '' } = values
+      const imageUrl = previewImage || ''
       const payload = { name, description, about, imageUrl }
+
       return updateAuthorById(authorId, payload).then(() => {
         console.log('done')
         return window.location.replace('/author')
@@ -43,9 +45,7 @@ class AuthorEditor extends Component {
       const previewImage = await snapshoot.ref.getDownloadURL()
 
       message.success(`Profile picture uploaded successfully`)
-      this.setState({ previewImage })
-
-      return previewImage
+      return this.setState({ previewImage })
     } catch (err) {
       message.error(err)
     }

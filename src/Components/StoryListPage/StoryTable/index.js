@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table, Divider, Tag, Icon } from 'antd'
-import { timestampToDateFormat } from '../../../lib/time'
+import { timestampToDateFormat, numToTimeFormat } from '../../../lib/time'
 import { Link } from 'react-router-dom'
 
 import { AUTHOR_IMAGE_NOT_FOUND } from '../../../const/images'
@@ -19,7 +19,7 @@ const authorFieldDiv = targetAuthor => {
   return (
     <div>
       {name && (
-        <Link to={`/author/${id}`}>
+        <Link to={`/storys/authors/${id}`}>
           <div className="UserWrapperImageEditorList">
             {<div className="spuareUserImageEditorList" style={squareDiv(imageUrl)} />}
             <span> {name} </span>
@@ -87,6 +87,7 @@ export default class StoreListTable extends React.Component {
         categorys: selectedCategorys,
         author,
         createdAt,
+        updatedAt,
         id,
         status = 'DRAFT'
       } = item
@@ -98,7 +99,7 @@ export default class StoreListTable extends React.Component {
         key: index,
         author: targetAuthor,
         createdAt: timestampToDateFormat(createdAt),
-        title: { title, id },
+        title: { title, id, updatedAt },
         categorys: selectedCategorysList,
         status,
         deleteStory: function() {
@@ -128,7 +129,15 @@ export default class StoreListTable extends React.Component {
         title: 'Title',
         dataIndex: 'title',
         key: 'title',
-        render: ({ title, id }) => <Link to={`/storys/${id}`}> {title} </Link>
+        render: ({ title, id, updatedAt }) => (
+          <Link to={`/storys/${id}`}>
+            <span className="storyListTitle"> {title} </span>
+            <span className="storyListTitleUpdate">
+              {' '}
+              Updated: {`${timestampToDateFormat(updatedAt, true)}`}{' '}
+            </span>
+          </Link>
+        )
       },
       {
         title: 'Categorys',
