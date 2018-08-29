@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Button, Breadcrumb } from 'antd'
+import { Button } from 'antd'
 import StoreListTable from '../../Components/StoryListPage/StoryTable'
+import StoryBreadcrumb from '../../Components/StoryListPage/StoryBreadcrumb'
 import { Route } from 'react-router-dom'
 import './index.css'
 
@@ -15,9 +16,7 @@ class StoryPage extends Component {
     return (
       <div className="storyPageWrapper">
         <div className="titleBarWrapper">
-          <Breadcrumb>
-            <Breadcrumb.Item>Storys/</Breadcrumb.Item>
-          </Breadcrumb>
+          <StoryBreadcrumb {...this.props} />
           <Button onClick={this.handleCreate} type="primary" className="pushFlex">
             {' '}
             New{' '}

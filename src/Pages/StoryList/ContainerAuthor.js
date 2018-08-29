@@ -7,7 +7,9 @@ class ContainerCategory extends Component {
   render() {
     const authorId = this.props.match.params.id
     const command = queryByAuthor(database, authorId) || null
-    const _props = { ...this.props, command }
+    const queryType = 'author'
+    const current = authorId
+    const _props = { ...this.props, command, queryType, current }
     return <Container key={authorId} {..._props} />
   }
 }

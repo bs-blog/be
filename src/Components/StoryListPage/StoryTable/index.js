@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table, Divider, Tag, Icon } from 'antd'
-import { timestampToDateFormat, numToTimeFormat } from '../../../lib/time'
+import { timestampToDateFormat } from '../../../lib/time'
 import { Link } from 'react-router-dom'
 
 import { AUTHOR_IMAGE_NOT_FOUND } from '../../../const/images'

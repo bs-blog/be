@@ -1,0 +1,14 @@
+.storyStatusFont {
+  font-size: x-small;
+}
+
+.storyListTitle {
+  display: block;
+  color: #4e4e4e;
+}
+
+.storyListTitleUpdate {
+  display: block;
+  color: gray;
+  font-size: 10px;
+}

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import './index.css'
-import { Button, message, Breadcrumb } from 'antd'
+import { Button, message } from 'antd'
 import DraftJS from 'draft-js'
 import EditorComponent from '../../Components/EditorPage/Editor'
 import MultiItemsSeletor from '../../Components/EditorPage/MultiItemsSeletor'
 import SingleSelector from '../../Components/EditorPage/SingleSelector'
+import StoryBreadcrumb from '../../Components/Common/StoryBreadcrumb'
 import { Link, Route } from 'react-router-dom'
 
 class EditorPage extends Component {
@@ -57,12 +58,7 @@ class EditorPage extends Component {
     return (
       <div className="editorPageWrapper">
         <div className="titleBarWrapper">
-          <Breadcrumb>
-            <Breadcrumb.Item>
-              <Link to="/storys">Storys</Link>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>{displayTitle}</Breadcrumb.Item>
-          </Breadcrumb>
+          <StoryBreadcrumb queryType="story" current={displayTitle} />
           <Button onClick={this.onHandleSaveStory} type="primary" className="pushFlex">
             {' '}
             Save Draft{' '}
