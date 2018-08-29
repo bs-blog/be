@@ -32,6 +32,7 @@ const authorFieldDiv = targetAuthor => {
 }
 
 export default class StoreListTable extends React.Component {
+  // start -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= copy from antd
   state = {
     filteredInfo: null,
     sortedInfo: null
@@ -63,6 +64,8 @@ export default class StoreListTable extends React.Component {
       }
     })
   }
+
+  // end -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= copy from antd
 
   findCategorysByCatMapping(targetCategorys = {}) {
     if (!targetCategorys || global.isEmptyObject(targetCategorys)) return []
