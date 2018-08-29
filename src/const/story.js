@@ -1,0 +1,11 @@
+export const STORY_STATUS_LIST = ['DRAFT', 'PUBLISHED', 'DISABLE']
+
+export const STORY_STATUS_OBJECT = {
+  draft: STORY_STATUS_LIST[0],
+  published: STORY_STATUS_LIST[1],
+  disable: STORY_STATUS_LIST[2]
+}
+
+export const STORY_STATUS_DRAFT = STORY_STATUS_OBJECT['draft']
+export const STORY_STATUS_PUBLISHED = STORY_STATUS_OBJECT['published']
+export const STORY_STATUS_DISABLE = STORY_STATUS_OBJECT['disable']

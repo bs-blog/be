@@ -1,11 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Table, Divider, Tag, Icon } from 'antd'
+import { timestampToDateFormat } from '../../../lib/time'
+import { Link } from 'react-router-dom'
+
+import { AUTHOR_IMAGE_NOT_FOUND } from '../../../const/images'
+import { STORY_STATUS_LIST } from '../../../const/story'
+import { squareDiv } from '../../../lib/style'
 import './index.css'
 
-import { AUTHOR_IMAGE_NOT_FOUND } from '../../../lib/const'
-import { squareDiv } from '../../../lib/style'
-import { timestampToDateFormat } from '../../../lib/time'
+const filterCondition = STORY_STATUS_LIST.map(item => ({
+  text: item.toLowerCase(),
+  value: item
+}))
 
 const authorFieldDiv = targetAuthor => {
   const { imageUrl: authorImageUrl, id, name } = targetAuthor
@@ -25,64 +31,39 @@ const authorFieldDiv = targetAuthor => {
   )
 }
 
-const columns = [
-  {
-    title: 'Title',
-    dataIndex: 'title',
-    key: 'title',
-    render: ({ title, id }) => <Link to={`/storys/${id}`}> {title} </Link>
-  },
-  {
-    title: 'Categorys',
-    key: 'categorys',
-    dataIndex: 'categorys',
-    render: categorys => (
-      <span>
-        {categorys.map(({ name }) => (
-          <Tag color="blue" key={name}>
-            {name}
-          </Tag>
-        ))}
-      </span>
-    )
-  },
-  {
-    title: 'Author',
-    dataIndex: 'author',
-    key: 'author',
-    render: authorFieldDiv
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    key: 'status'
-  },
-  {
-    title: 'CreatedAt',
-    dataIndex: 'createdAt',
-    key: 'createdAt'
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => {
-      const { deleteStory, disableStory } = record
-      return (
-        <span>
-          <a onClick={disableStory}>
-            <Icon type="minus-circle-o" />
-          </a>
-          <Divider type="vertical" />
-          <a onClick={deleteStory}>
-            <Icon type="delete" />
-          </a>
-        </span>
-      )
-    }
-  }
-]
-
 export default class StoreListTable extends React.Component {
+  state = {
+    filteredInfo: null,
+    sortedInfo: null
+  }
+
+  handleChange = (pagination, filters, sorter) => {
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter
+    })
+  }
+
+  clearFilters = () => {
+    this.setState({ filteredInfo: null })
+  }
+
+  clearAll = () => {
+    this.setState({
+      filteredInfo: null,
+      sortedInfo: null
+    })
+  }
+
+  setAgeSort = () => {
+    this.setState({
+      sortedInfo: {
+        order: 'descend',
+        columnKey: 'age'
+      }
+    })
+  }
+
   findCategorysByCatMapping(targetCategorys = {}) {
     if (!targetCategorys || global.isEmptyObject(targetCategorys)) return []
 
@@ -130,13 +111,87 @@ export default class StoreListTable extends React.Component {
       }
     })
   }
+
   render() {
     const { storys = [] } = this.props
     const data = this.tableData(storys)
 
+    let { sortedInfo, filteredInfo } = this.state
+    sortedInfo = sortedInfo || {}
+    filteredInfo = filteredInfo || {}
+
+    const columns = [
+      {
+        title: 'Title',
+        dataIndex: 'title',
+        key: 'title',
+        render: ({ title, id }) => <Link to={`/storys/${id}`}> {title} </Link>
+      },
+      {
+        title: 'Categorys',
+        key: 'categorys',
+        dataIndex: 'categorys',
+        render: categorys => (
+          <span>
+            {categorys.map(({ name }) => (
+              <Tag color="blue" key={name}>
+                {name}
+              </Tag>
+            ))}
+          </span>
+        )
+      },
+      {
+        title: 'Author',
+        dataIndex: 'author',
+        key: 'author',
+        render: authorFieldDiv
+      },
+      {
+        title: 'Status',
+        dataIndex: 'status',
+        key: 'status',
+        filters: filterCondition,
+        filteredValue: filteredInfo.status || null,
+        onFilter: (value, record) => record.status.includes(value),
+        sorter: (a, b) => a.status.length - b.status.length,
+        sortOrder: sortedInfo.columnKey === 'status' && sortedInfo.order,
+        render: status => <span className="storyStatusFont">{status}</span>
+      },
+      {
+        title: 'CreatedAt',
+        dataIndex: 'createdAt',
+        key: 'createdAt',
+        sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+        sortOrder: sortedInfo.columnKey === 'createdAt' && sortedInfo.order
+      },
+      {
+        title: 'Action',
+        key: 'action',
+        render: (text, record) => {
+          const { deleteStory, disableStory } = record
+          return (
+            <span>
+              <a onClick={disableStory}>
+                <Icon type="minus-circle-o" />
+              </a>
+              <Divider type="vertical" />
+              <a onClick={deleteStory}>
+                <Icon type="delete" />
+              </a>
+            </span>
+          )
+        }
+      }
+    ]
     return (
-      <div className="">
-        <Table columns={columns} dataSource={data} />
+      <div>
+        <Table
+          columns={columns}
+          dataSource={data}
+          onChange={this.handleChange}
+          pagination={false}
+        />
       </div>
     )
   }
