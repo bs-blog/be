@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './index.css'
-import { Row, Button, message, Breadcrumb } from 'antd'
+import { Button, message, Breadcrumb } from 'antd'
 import DraftJS from 'draft-js'
 import EditorComponent from '../../Components/EditorPage/Editor'
 import MultiItemsSeletor from '../../Components/EditorPage/MultiItemsSeletor'

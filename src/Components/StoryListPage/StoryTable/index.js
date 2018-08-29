@@ -136,9 +136,9 @@ export default class StoreListTable extends React.Component {
         dataIndex: 'categorys',
         render: categorys => (
           <span>
-            {categorys.map(({ name }) => (
+            {categorys.map(({ name, id }) => (
               <Tag color="blue" key={name}>
-                {name}
+                <Link to={`/storys/category/${id}`}>{name}</Link>
               </Tag>
             ))}
           </span>
