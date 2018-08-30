@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'antd'
 import StoreListTable from '../../Components/StoryListPage/StoryTable'
-import StoryBreadcrumb from '../../Components/StoryListPage/StoryBreadcrumb'
+import StoryBreadcrumb from '../../Components/Common/StoryBreadcrumb'
 import { Route } from 'react-router-dom'
 import './index.css'
 
