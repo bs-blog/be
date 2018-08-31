@@ -131,7 +131,7 @@ export default class StoreListTable extends React.Component {
         key: 'title',
         render: ({ title, id, updatedAt }) => (
           <Link to={`/storys/${id}`}>
-            <span className="storyListTitle"> {title} </span>
+            <span className="storyListTitle"> {title || 'unknow-title'} </span>
             <span className="storyListTitleUpdate">
               {' '}
               Updated: {`${timestampToDateFormat(updatedAt, true)}`}{' '}
