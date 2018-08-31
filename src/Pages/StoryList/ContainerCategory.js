@@ -7,7 +7,9 @@ class ContainerCategory extends Component {
   render() {
     const categoryId = this.props.match.params.id
     const command = queryByCategory(database, categoryId) || null
-    const _props = { ...this.props, command }
+    const queryType = 'category'
+    const current = categoryId
+    const _props = { ...this.props, command, queryType, current }
     return <Container key={categoryId} {..._props} />
   }
 }

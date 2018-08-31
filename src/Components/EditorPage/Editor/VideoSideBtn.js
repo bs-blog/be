@@ -41,7 +41,7 @@ export default class VideoSideBtn extends React.Component {
 }
 
 const VideoButtonDiv = styled.button`
-  background-image: url(/static/video-128.png);
+  background-image: url(https://bs-blog.github.io/be/static/video-128.png);
   background-size: 30px 30px;
   background-repeat: no-repeat;
   width: 30px;

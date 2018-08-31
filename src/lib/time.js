@@ -14,13 +14,17 @@ export const numToTimeFormat = _num => {
   return `${fillZero(min)}:${fillZero(sec)}`
 }
 
-export const timestampToDateFormat = timestamp => {
+export const timestampToDateFormat = (timestamp, isIncludedTime) => {
   if (!timestamp) return ''
 
   const _d = new Date(timestamp)
   const month = _d.getUTCMonth() + 1
   const day = _d.getUTCDate()
   const year = _d.getUTCFullYear()
+  const hour = _d.getUTCHours()
+  const min = _d.getUTCMinutes()
+
+  if (isIncludedTime) return `${year}-${month}-${day} ${fillZero(hour)}:${fillZero(min)}`
 
   return `${year}-${month}-${day}`
 }

@@ -62,6 +62,7 @@ class Container extends Component {
         authors={authors}
         deleteStory={this.deleteStory}
         disableStory={this.disableStory}
+        {...this.props}
       />
     )
   }
