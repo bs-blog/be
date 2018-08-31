@@ -6,7 +6,7 @@ import EditorComponent from '../../Components/EditorPage/Editor'
 import MultiItemsSeletor from '../../Components/EditorPage/MultiItemsSeletor'
 import SingleSelector from '../../Components/EditorPage/SingleSelector'
 import StoryBreadcrumb from '../../Components/Common/StoryBreadcrumb'
-import { Link, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 class EditorPage extends Component {
   handleRequest = (storyId, payload) => {
