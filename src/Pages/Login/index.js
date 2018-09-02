@@ -1,7 +1,7 @@
 /*eslint-disable no-unused-vars*/
 import React, { Component } from 'react'
 import './index.css'
-import { Form, Input } from 'antd'
+import { message, Form, Input } from 'antd'
 const FormItem = Form.Item
 
 // read more ant: Form
@@ -26,13 +26,20 @@ class Login extends Component {
     return this.setState({ [field]: e.target.value })
   }
 
-  handleSubmit = e => {
-    console.log(' ------ handleSubmit ------')
-    console.log(this.state)
+  handleSubmit = async e => {
     e.preventDefault()
     const { email, password } = this.state
     const { signin } = this.props
-    return signin(email, password)
+
+    try {
+      const result = await signin(email, password)
+
+      if (!result.user) throw result
+
+      return message.success(`${email} login successed`)
+    } catch (err) {
+      return message.error(err.message || 'unknow error')
+    }
   }
 
   render() {

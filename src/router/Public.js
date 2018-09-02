@@ -8,7 +8,7 @@ class Container extends Component {
     if (currentUser && typeof currentUser.isLogin === 'boolean' && !currentUser.isLogin) {
       return this.props.children
     } else {
-      return null
+      return 'not login'
     }
   }
 }
