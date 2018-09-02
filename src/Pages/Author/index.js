@@ -4,6 +4,7 @@ import { message, Button, Icon, Form, Input, Upload } from 'antd'
 import { squareDiv } from '../../lib/style'
 import { AUTHOR_IMAGE_NOT_FOUND } from '../../const/images'
 import firebase from '../../lib/firebase'
+import { Route } from 'react-router-dom'
 
 const { TextArea } = Input
 const FormItem = Form.Item
@@ -18,7 +19,7 @@ class AuthorEditor extends Component {
   }
 
   handleSubmit(e) {
-    const { updateAuthorById } = this.props
+    const { updateAuthorById, history } = this.props
     const authorId = this.props.author.id
     const { previewImage } = this.state
     e.preventDefault()
@@ -33,7 +34,8 @@ class AuthorEditor extends Component {
 
       return updateAuthorById(authorId, payload).then(() => {
         console.log('done')
-        return window.location.replace('/author')
+        message.success(`User ${name} is saved successfully`)
+        return history.push(`/author`)
       })
     })
   }
@@ -119,4 +121,13 @@ class AuthorEditor extends Component {
 
 const WrappedAuthorEditor = Form.create()(AuthorEditor)
 
-export default WrappedAuthorEditor
+export default props => {
+  return (
+    <Route
+      render={({ history }) => {
+        const _props = { ...props, history }
+        return <WrappedAuthorEditor {..._props} />
+      }}
+    />
+  )
+}
