@@ -7,6 +7,7 @@ import MultiItemsSeletor from '../../Components/EditorPage/MultiItemsSeletor'
 import SingleSelector from '../../Components/EditorPage/SingleSelector'
 import StoryBreadcrumb from '../../Components/Common/StoryBreadcrumb'
 import { Route } from 'react-router-dom'
+import { getCoverImage, getTitle } from '../../lib/draft'
 
 class EditorPage extends Component {
   handleRequest = (storyId, payload) => {
@@ -19,10 +20,14 @@ class EditorPage extends Component {
     const { selectedCategory = [], selectedAuthor: author = '' } = this.props
     const { editorState } = this.refs.editorComponent.state
 
-    const data = JSON.stringify(DraftJS.convertToRaw(editorState.getCurrentContent()))
+    const rawContent = DraftJS.convertToRaw(editorState.getCurrentContent())
+    const data = JSON.stringify(rawContent)
+    const title = getTitle(rawContent)
+    const coverUrl = getCoverImage(rawContent)
+
     const categorys = {}
     selectedCategory.forEach(item => (categorys[item] = true))
-    return { data, categorys, author }
+    return { data, categorys, author, title, coverUrl }
   }
 
   onPublishSaveStory = () => {
@@ -38,6 +43,7 @@ class EditorPage extends Component {
     const { storyId } = this.props
     const payload = this.preHandleRequest()
     const status = 'DRAFT'
+
     return this.handleRequest(storyId, { ...payload, status }).then(() =>
       message.success(`Story is saved as draft successfully`)
     )
@@ -54,7 +60,7 @@ class EditorPage extends Component {
       onHandleChangeCategory,
       onHandleChangeAuthor
     } = this.props
-    const displayTitle = (storyData && storyData.name) || storyId
+    const displayTitle = (storyData && storyData.title) || storyId
     return (
       <div className="editorPageWrapper">
         <div className="titleBarWrapper">

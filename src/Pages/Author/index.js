@@ -33,7 +33,6 @@ class AuthorEditor extends Component {
       const payload = { name, description, about, imageUrl }
 
       return updateAuthorById(authorId, payload).then(() => {
-        console.log('done')
         message.success(`User ${name} is saved successfully`)
         return history.push(`/author`)
       })

@@ -63,7 +63,6 @@ class HomePage extends Component {
   }
 
   onHandleCreateCategory = () => {
-    console.log(' ----- onHandleCreateCategory ------')
     const { createCategory } = this.props
 
     return this.validateForm('CREATE')

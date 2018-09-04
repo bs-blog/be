@@ -9,8 +9,6 @@ const { Header, Content } = Layout
 
 class BigContent extends Component {
   render() {
-    console.log('routers: ', routers)
-
     return (
       <Layout style={{ marginLeft: 200 }}>
         <Content

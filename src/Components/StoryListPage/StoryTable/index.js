@@ -83,7 +83,7 @@ export default class StoreListTable extends React.Component {
     return storys.map((item, index) => {
       const { deleteStory, disableStory } = this.props
       const {
-        name: title,
+        title,
         categorys: selectedCategorys,
         author,
         createdAt,
