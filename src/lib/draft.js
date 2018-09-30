@@ -39,3 +39,18 @@ export const getTitle = draftData => {
 
   return ''
 }
+
+export const getDescription = draftData => {
+  if (!draftData) return ''
+
+  const rawContent = getRawContent(draftData)
+
+  if (!rawContent.blocks || !rawContent.blocks.length || rawContent.blocks.length <= 0) return ''
+
+  for (let i = 0; i < rawContent.blocks.length; i++) {
+    const item = rawContent.blocks[i]
+    if (item.text && item.text.length > 50) return item.text
+  }
+
+  return ''
+}

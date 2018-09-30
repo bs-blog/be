@@ -7,7 +7,7 @@ import MultiItemsSeletor from '../../Components/EditorPage/MultiItemsSeletor'
 import SingleSelector from '../../Components/EditorPage/SingleSelector'
 import StoryBreadcrumb from '../../Components/Common/StoryBreadcrumb'
 import { Route } from 'react-router-dom'
-import { getCoverImage, getTitle } from '../../lib/draft'
+import { getCoverImage, getTitle, getDescription } from '../../lib/draft'
 
 class EditorPage extends Component {
   handleRequest = (storyId, payload) => {
@@ -23,11 +23,12 @@ class EditorPage extends Component {
     const rawContent = DraftJS.convertToRaw(editorState.getCurrentContent())
     const data = JSON.stringify(rawContent)
     const title = getTitle(rawContent)
+    const description = getDescription(rawContent)
     const coverUrl = getCoverImage(rawContent)
 
     const categorys = {}
     selectedCategory.forEach(item => (categorys[item] = true))
-    return { data, categorys, author, title, coverUrl }
+    return { data, categorys, author, title, coverUrl, description }
   }
 
   onPublishSaveStory = () => {
