@@ -23,13 +23,13 @@ script:
   - npm run build
 before_deploy:
   - npm run build
-deploy:
-  provider: pages
-  skip-cleanup: true
-  keep-history: true
-  github_token: $github_token
-  target-branch: gh-pages
-  local_dir: build
-  on:
-    branch: master
-    tags: true
+# deploy:
+#   provider: pages
+#   skip-cleanup: true
+#   keep-history: true
+#   github_token: $github_token
+#   target-branch: gh-pages
+#   local_dir: build
+#   on:
+#     branch: master
+#     tags: true
