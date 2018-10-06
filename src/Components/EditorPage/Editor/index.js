@@ -2,7 +2,7 @@ import React from 'react'
 import { Editor, createEditorState, Block, rendererFn } from 'medium-draft'
 
 import './index.css'
-import ImageSideBtn from './ImageSideBtn'
+import { ApiImageSideBtn } from './ImageSideBtn'
 import VideoSideBtn from './VideoSideBtn'
 import AtomicEmbedComponent from './AtomicEmbedComponent'
 import { AtomicBlock } from './AtomicBlock'
@@ -18,7 +18,7 @@ class EditorComponent extends React.Component {
     this.sideButtons = [
       {
         title: 'Image',
-        component: ImageSideBtn
+        component: ApiImageSideBtn
       },
       {
         title: 'Video',

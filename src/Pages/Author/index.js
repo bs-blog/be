@@ -38,7 +38,7 @@ class AuthorEditor extends Component {
       })
     })
   }
-  upload = async file => {
+  firebaseUpload = async file => {
     try {
       const name = file.name
       const storageRef = firebase.storage().ref()
@@ -52,15 +52,36 @@ class AuthorEditor extends Component {
     }
   }
 
+  onChangeUpload = info => {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList)
+    }
+    if (info.file.status === 'done') {
+      const previewImage = info.file.response.url
+      message.success(`${info.file.response.url} file uploaded successfully`)
+      this.setState({ previewImage })
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`)
+    }
+  }
+
   render() {
     const { author } = this.props
     const { getFieldDecorator } = this.props.form
     const { previewImage } = this.state
     const { id, name, about, description } = author
 
-    const imageProps = {
+    const imageApiUploadProps = {
       name: 'file',
-      action: this.upload
+      action: '/ajax/upload',
+      headers: {
+        authorization: 'authorization-text'
+      }
+    }
+
+    const imageFirebaseUploadProps = {
+      name: 'file',
+      action: this.firebaseUpload
     }
 
     return (
@@ -96,7 +117,7 @@ class AuthorEditor extends Component {
 
               <FormItem>
                 {getFieldDecorator('imageUrl', {})(
-                  <Upload {...imageProps}>
+                  <Upload {...imageApiUploadProps} onChange={this.onChangeUpload}>
                     <Button>
                       <Icon type="upload" /> Click to Upload
                     </Button>

@@ -22,12 +22,13 @@ router.post('/ajax/upload', (req, res) => {
   form.parse(req, (err, fields, files) => {
     const {path: tempPath, originalFilename} = files.file[0];
     const copyToPath = "./download/" + originalFilename;
-
     downloadFileToLocal (tempPath, copyToPath).then(
       () => uploadLocalFile(copyToPath)
-    ).then(
-      result => res.json({url: result})
-    )
+    ).then(result => {
+        const {S3_ORIGIN_URL, S3_CDN_URL} = process.env
+        const url = result.replace(S3_ORIGIN_URL, S3_CDN_URL)
+        return res.json({url})
+    })
   })
 })
 

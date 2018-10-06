@@ -44,15 +44,21 @@ export const signout = () => {
 
 export const getCurrentUser = cb => {
   firebase.auth().onAuthStateChanged(function(user) {
-    if (user && user.email) {
-      return cb({
-        email: user.email,
-        displayName: user.displayName,
-        uid: user.uid
-      })
-    }
+    if (!user || !user.email) return cb(null)
 
-    return cb(null)
+    firebase
+      .auth()
+      .currentUser.getIdTokenResult()
+      .then(idTokenResult => {
+        if (idTokenResult.claims.admin && user && user.email) {
+          return cb({
+            email: user.email,
+            displayName: user.displayName,
+            uid: user.uid
+          })
+        }
+        return cb(null)
+      })
   })
 }
 export const database = firebase.database()

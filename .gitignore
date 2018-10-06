@@ -23,5 +23,6 @@ yarn-error.log*
 # client
 /public/static/locator.js
 env.sh
+env-prod.sh
 service-account.json
 /download

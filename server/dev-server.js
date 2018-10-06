@@ -1,10 +1,10 @@
 const express = require('express');
-// const uploadRouter = require('./routers/upload')
+const uploadRouter = require('./routers/upload')
 
 const app = express();
 const port = process.env.PORT || 9009;
 
-// app.use(uploadRouter)
+app.use(uploadRouter)
 
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
