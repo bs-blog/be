@@ -79,11 +79,6 @@ class AuthorEditor extends Component {
       }
     }
 
-    const imageFirebaseUploadProps = {
-      name: 'file',
-      action: this.firebaseUpload
-    }
-
     return (
       <div>
         <div className="editorPageTitleBox">
