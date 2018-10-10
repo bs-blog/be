@@ -18,3 +18,11 @@
 .md-block.md-block-image > div {
   text-align: center;
 }
+
+.md-editor-toolbar {
+  margin-left: 110px;
+}
+
+.md-editor-toolbar::after {
+  margin-left: -115px; 
+}
