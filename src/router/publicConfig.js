@@ -6,6 +6,7 @@ import StoryEditor from '../Pages/StoryEditor/Container'
 import StoryList from '../Pages/StoryList/Container'
 import StoryCategoryList from '../Pages/StoryList/ContainerCategory'
 import StoryAuthorList from '../Pages/StoryList/ContainerAuthor'
+import System from '../Pages/System/Container'
 
 const config = [
   {
@@ -46,6 +47,12 @@ const config = [
     title: 'Storys of Author',
     isSidebar: false,
     component: StoryAuthorList
+  },
+  {
+    path: '/system',
+    title: 'System',
+    icon: 'dashboard',
+    component: System
   },
   {
     path: '/logout',

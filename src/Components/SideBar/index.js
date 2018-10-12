@@ -13,12 +13,15 @@ const iconMapping = {
   Logout: 'logout'
 }
 
-const RowItem = ({ path, title, isSidebar = true }) => {
+const RowItem = ({ path, title, icon, isSidebar = true }) => {
   if (!isSidebar) return
+
+  const _icon = icon || iconMapping[title] || 'user'
+
   return (
     <Item key={title}>
       <Link to={path}>
-        <Icon type={iconMapping[title] || 'user'} />
+        <Icon type={_icon} />
         <span className="nav-text">{title}</span>
       </Link>
     </Item>
