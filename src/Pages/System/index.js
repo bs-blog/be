@@ -65,9 +65,12 @@ class System extends Component {
             {textField('productNameZh', 'Chinese Name')}
             {textField('productNameEng', 'English Name')}
             {textField('productDescription', 'Description')}
+            {textField('productLogoUrl', 'Logo Url')}
             {textField('productHost', 'Host Url')}
             {textField('productFacebookId', 'Facebook Id')}
-            {textField('productLogoUrl', 'Logo Url')}
+            {textField('youtubeUrl', 'Youtube Url')}
+            {textField('facebookUrl', 'facebook Url')}
+            {textField('contactEmail', 'Contact Email')}
             <FormItem {...tailFormItemLayout}>
               <Button type="primary" htmlType="submit" className="login-form-button">
                 Save
