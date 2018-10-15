@@ -36,6 +36,9 @@ module.exports = class Base {
   validateUpdatePayload(payload) {
     return true
   }
+  update(payload) {
+    return fetch('/ajax/system/reset').then(() => this.ref.update(payload))
+  }
 
   updateById(id, payload) {
     if (!payload.createdAt) {
@@ -43,7 +46,9 @@ module.exports = class Base {
       payload = { ...payload, updatedAt }
     }
 
-    if (this.validateUpdatePayload(payload)) return this.ref.child(id).update(payload)
+    if (this.validateUpdatePayload(payload)) {
+      return fetch('/ajax/system/reset').then(() => this.ref.child(id).update(payload))
+    }
 
     return Promise.reject('invalidate Data')
   }
@@ -62,19 +67,13 @@ module.exports = class Base {
       payload = { ...payload, createdAt, updatedAt }
     }
 
-    return this.ref
-      .push()
-      .set(payload)
-      .then(() => {
-        return this.ref.once('value')
-      })
-      .then(snap => {
-        return snap
-      })
+    return fetch('/ajax/system/reset')
+      .then(() => this.ref.push().set(payload))
+      .then(() => this.ref.once('value'))
   }
 
   // delete -=-=--=-=-=-=-=-=-=--=-=-=-=-=
   deleteById(id) {
-    return this.ref.child(id).remove()
+    return fetch('/ajax/system/reset').then(() => this.ref.child(id).remove())
   }
 }

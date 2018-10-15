@@ -2,11 +2,11 @@ var express = require('express')
 var path = require('path')
 require('newrelic');
 var app = express()
-const uploadRouter = require('./routers/upload')
 
 const port = process.env.PORT || 3000
 
-app.use(uploadRouter)
+app.use(require('./routers/upload'))
+app.use(require('./routers/system'))
 
 app.use(express.static(path.join(__dirname, '../build')));
 

@@ -21,7 +21,7 @@ module.exports = class Categorys extends Base {
       payload = { ...payload, updatedAt }
     }
 
-    if (this.validateUpdatePayload(payload)) return this.ref.update(payload)
+    if (this.validateUpdatePayload(payload)) return super.update(payload)
 
     return Promise.reject('invalidate Data')
   }
