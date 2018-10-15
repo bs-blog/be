@@ -1,5 +1,6 @@
 var express = require('express')
 var path = require('path')
+require('newrelic');
 var app = express()
 const uploadRouter = require('./routers/upload')
 
