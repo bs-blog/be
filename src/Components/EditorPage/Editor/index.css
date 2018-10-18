@@ -15,6 +15,10 @@
   max-width: 650px;
 }
 
+.editorComponentWrapper .md-block-image img{
+  max-height: 600px;
+}
+
 .md-block.md-block-image > div {
   text-align: center;
 }
@@ -25,4 +29,39 @@
 
 .md-RichEditor-editor div.md-editor-toolbar.md-editor-toolbar--isopen::after {
   margin-left: -115px; 
+}
+
+.editorComponentWrapper h2 {
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 600;
+  margin-top: 20px;
+}
+.editorComponentWrapper h3 {
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 600;
+  margin-top: 30px;
+}
+.editorComponentWrapper blockquote.md-RichEditor-editor.md-RichEditor-blockquote {
+  margin-top: 36px;
+  --x-height-multiplier: 0.342;
+  --baseline-multiplier: 0.22;
+  font-family: medium-content-slab-serif-font, Georgia, Cambria, 'Times New Roman', Times,
+    serif;
+  font-weight: 400;
+  font-style: italic;
+  padding: 0 10%;
+  font-size: 24px;
+  margin-left: -1.5px;
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+}
+.md-block-paragraph {
+  margin-top: 21px;
+}
+.md-block-paragraph span {
+  font-size: 18px;
+  line-height: 1.7;
+  letter-spacing: -0.004em;
 }
