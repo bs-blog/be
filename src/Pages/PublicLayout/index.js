@@ -4,13 +4,13 @@ import './index.css'
 import { Route } from 'react-router-dom'
 import { Layout } from 'antd'
 import routers from '../../router/publicConfig'
-const { Header, Content } = Layout
+const { Content } = Layout
 //const { Header, Content, Footer } = Layout
 
 class BigContent extends Component {
   render() {
     return (
-      <Layout style={{ marginLeft: 200 }}>
+      <Layout>
         <Content
           style={{
             margin: '24px 16px 0',

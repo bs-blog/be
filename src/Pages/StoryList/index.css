@@ -19,7 +19,7 @@
 
 .titleBarWrapper{
     display: flex;
-    height: 80px;
+    margin-bottom: 20px;
 }
 
 .titleBarWrapper .ant-breadcrumb{

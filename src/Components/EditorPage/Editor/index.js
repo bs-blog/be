@@ -6,6 +6,8 @@ import { ApiImageSideBtn } from './ImageSideBtn'
 import VideoSideBtn from './VideoSideBtn'
 import AtomicEmbedComponent from './AtomicEmbedComponent'
 import { AtomicBlock } from './AtomicBlock'
+import blockButtons from '../../../config/editorBlockButtons'
+import inlineButtons from '../../../config/editorInlinStyle'
 
 class EditorComponent extends React.Component {
   constructor(props) {
@@ -69,6 +71,8 @@ class EditorComponent extends React.Component {
             onChange={this.onChange}
             sideButtons={this.sideButtons}
             rendererFn={this.overideRendererFn}
+            blockButtons={blockButtons.blogEditor}
+            inlineButtons={inlineButtons.blogEditor}
           />
         </div>
       </div>
