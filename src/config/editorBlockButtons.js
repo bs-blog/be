@@ -7,13 +7,13 @@ const blogEditor = [
   },
   {
     label: 'H2',
-    style: 'header-one',
+    style: 'header-two',
     icon: 'header',
     description: 'Heading 2'
   },
   {
     label: 'H3',
-    style: 'header-one',
+    style: 'header-three',
     icon: 'header',
     description: 'Heading 3'
   },

@@ -22,3 +22,15 @@
 .leftMargin {
   margin-left: 10px;
 }
+
+.buttonBarWrapper{
+  display: flex;
+  justify-content: flex-end;
+}
+.saveButton{
+  font-size:  12px;
+  margin: 0 10px;
+}
+.rowWrapper{
+  margin-bottom: 20px;
+}
