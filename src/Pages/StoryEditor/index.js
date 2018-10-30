@@ -64,16 +64,8 @@ class EditorPage extends Component {
     const displayTitle = (storyData && storyData.title) || storyId
     return (
       <div className="editorPageWrapper">
-        <div className="titleBarWrapper">
+        <div className="titleBarWrapper rowWrapper">
           <StoryBreadcrumb queryType="story" current={displayTitle} />
-          <Button onClick={this.onHandleSaveStory} type="primary" className="pushFlex">
-            {' '}
-            Save Draft{' '}
-          </Button>
-          <Button onClick={this.onPublishSaveStory} type="primary" className="leftMargin">
-            {' '}
-            Save Publish{' '}
-          </Button>
         </div>
         <div>
           {categorys &&
@@ -95,6 +87,16 @@ class EditorPage extends Component {
                 onHandleSelection={onHandleChangeAuthor}
               />
             )}
+        </div>
+        <div className="rowWrapper buttonBarWrapper">
+          <Button onClick={this.onHandleSaveStory} type="primary" className="saveButton">
+            {' '}
+            Draft{' '}
+          </Button>
+          <Button onClick={this.onPublishSaveStory} type="primary" className="saveButton">
+            {' '}
+            Publish{' '}
+          </Button>
         </div>
         <div className="editorWrapper">
           {storyData &&
