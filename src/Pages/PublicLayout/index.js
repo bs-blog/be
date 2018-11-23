@@ -15,7 +15,7 @@ class BigContent extends Component {
           style={{
             margin: '24px 16px 0',
             overflow: 'initial',
-            height: '100vh'
+            minHeight: '100vh'
           }}
         >
           {routers.map(({ path, component, exact = true }, index) => {
