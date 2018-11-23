@@ -11,7 +11,7 @@ class BigContent extends Component {
     return (
       <Layout hasSider={false}>
         {/* <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}> */}
-        <Content style={{ height: '100vh' }}>
+        <Content style={{ minHeight: '100vh' }}>
           <Route exact path={path} component={component} />
         </Content>
         {/* <Footer style={{ textAlign: 'center' }}>designed by</Footer> */}
