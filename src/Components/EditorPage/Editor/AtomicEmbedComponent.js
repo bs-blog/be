@@ -7,12 +7,18 @@ const EmbededVideoBlock = styled.div`
 `
 
 const getInnerHtml = url => {
+  if (url.indexOf('soundcloud.com') !== -1) {
+    // <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/182045307&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+    return `${url}`
+  }
+
   if (url.indexOf('<iframe') !== -1) {
     const iframeSrc = url.split(' ')[1]
     if (iframeSrc.indexOf('src="https://player.vimeo.com/video/') !== -1) {
       // http://tv.pacificleague.jp/vod/pc/topics/sns/27948 iframe
       return `<iframe ${iframeSrc} width="640" height="360" frameborder="0" allowfullscreen />`
     }
+
     return ''
   }
 
